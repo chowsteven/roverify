@@ -4,8 +4,9 @@ const mongoose = require('mongoose');
 const { S3Client } = require('@aws-sdk/client-s3');
 const multer = require('multer');
 const multerS3 = require('multer-s3');
-const bcrypt = require('bcrypt');
-const { body, validationResult } = require('express-validator');
+const userRoutes = require('./routes/users');
+const playlistRoutes = require('./routes/playlists');
+const songRoutes = require('./routes/songs');
 // const compression = require('compression');
 // const helmet = require('helmet');
 
@@ -23,5 +24,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 // app.use(compression());
 // app.use(helmet());
+
+app.use('/api/users', userRoutes);
+app.use('/api/playlists', playlistRoutes);
+app.use('/api/songs', songRoutes);
 
 app.listen(process.env.PORT || 5000);
