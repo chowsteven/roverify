@@ -26,7 +26,10 @@ exports.userSignup = [
 
       // return any errors
       if (!errors.isEmpty()) {
-        res.json(errors);
+        const errorsObj = errors.mapped();
+        const validationMsgs = Object.values(errorsObj).map((err) => err.msg);
+
+        res.status(400).json({ error: validationMsgs });
       } else {
         // no errors, continue
         const username = req.body.username;
@@ -65,42 +68,34 @@ exports.userLogin = [
 
   async (req, res, next) => {
     try {
-      // get errors
-      const errors = validationResult(req);
+      // no errors, continue
+      const username = req.body.username;
+      const password = req.body.password;
 
-      // return any errors
-      if (!errors.isEmpty()) {
-        res.json(errors);
-      } else {
-        // no errors, continue
-        const username = req.body.username;
-        const password = req.body.password;
+      // find user
+      const existingUser = await User.findOne({ username });
 
-        // find user
-        const existingUser = await User.findOne({ username });
-
-        if (!existingUser) {
-          throw Error('Username does not exist');
-        }
-
-        // check password
-        const isCorrectPassword = await bcrypt.compare(
-          password,
-          existingUser.password
-        );
-
-        if (!isCorrectPassword) {
-          throw Error('Incorrect password');
-        }
-
-        // issue JWT token
-        const jwtToken = jwt.sign(
-          { _id: existingUser._id },
-          process.env.JWT_SECRET
-        );
-
-        res.status(200).json({ token: jwtToken });
+      if (!existingUser) {
+        throw Error('Username does not exist');
       }
+
+      // check password
+      const isCorrectPassword = await bcrypt.compare(
+        password,
+        existingUser.password
+      );
+
+      if (!isCorrectPassword) {
+        throw Error('Incorrect password');
+      }
+
+      // issue JWT token
+      const jwtToken = jwt.sign(
+        { _id: existingUser._id },
+        process.env.JWT_SECRET
+      );
+
+      res.status(200).json({ token: jwtToken });
     } catch (err) {
       res.status(400).json({ error: err.message });
     }
