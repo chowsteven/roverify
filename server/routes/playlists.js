@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const { verifyToken } = require('../middleware/verifyToken');
 const {
   getPlaylists,
   getPlaylist,
@@ -7,6 +8,8 @@ const {
   updatePlaylist,
   deletePlaylist,
 } = require('../controllers/playlistController');
+
+router.use(verifyToken);
 
 // Get all playlists
 router.get('/', getPlaylists);
@@ -18,7 +21,7 @@ router.get('/:id', getPlaylist);
 router.post('/', addPlaylist);
 
 // Update playlist
-router.post('/:id', updatePlaylist);
+router.patch('/:id', updatePlaylist);
 
 // Delete playlist
 router.delete('/:id', deletePlaylist);
