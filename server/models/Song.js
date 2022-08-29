@@ -3,10 +3,11 @@ const Schema = mongoose.Schema;
 
 const songSchema = new Schema(
   {
-    artist: { type: String },
-    title: { type: String },
-    songURL: { type: String },
-    uploadedBy: { type: [Schema.Types.ObjectId], ref: 'User' },
+    artist: { type: String, default: '' },
+    title: { type: String, default: '' },
+    songURL: { type: String, default: '' },
+    inPlaylist: { type: Schema.Types.ObjectId, ref: 'Playlist' },
+    uploadedBy: { type: Schema.Types.ObjectId, ref: 'User' },
   },
   { timestamps: true }
 );
