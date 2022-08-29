@@ -20,10 +20,10 @@ const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error'));
 
 // Set up middleware
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
 // app.use(compression());
 // app.use(helmet());
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 
 app.use('/api/users', userRoutes);
 app.use('/api/playlists', playlistRoutes);
