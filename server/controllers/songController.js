@@ -2,6 +2,8 @@ const Song = require('../models/Song');
 const Playlist = require('../models/Playlist');
 const mongoose = require('mongoose');
 const { body } = require('express-validator');
+const cloudinary = require('../utils/cloudinary');
+const upload = require('../utils/multer');
 
 // Get songs
 exports.getSongs = async (req, res, next) => {
@@ -39,9 +41,11 @@ exports.addSong = [
   body('title').trim().escape(),
   body('songURL').trim().escape(),
   body('playlistName').trim().escape(),
+  // upload using multer
+  upload.single('song'),
   async (req, res, next) => {
     // get info from req.body
-    const { artist, title, songURL, playlistName } = req.body;
+    const { artist, title, playlistName } = req.body;
 
     // get userId
     const userId = req.userId;
@@ -56,12 +60,21 @@ exports.addSong = [
       return res.json({ error: 'Playlist not found' });
     }
 
+    // upload song to Cloudinary
+    const uploadedSong = await cloudinary.uploader
+      .upload(req.file.path, {
+        resource_type: 'video',
+        folder: userId,
+      })
+      .catch((err) => res.json({ error: err.message }));
+
     // create song
     Song.create(
       {
         artist,
         title,
-        songURL,
+        songURL: uploadedSong.secure_url,
+        cloudinaryId: uploadedSong.public_id,
         inPlaylist: targetPlaylist._id,
         uploadedBy: userId,
       },
@@ -84,6 +97,8 @@ exports.addSong = [
         res.json({ newSong: song });
       }
     );
+
+    // delete from multer storage?
   },
 ];
 
@@ -184,6 +199,9 @@ exports.deleteSong = async (req, res, next) => {
       }
     }
   );
+
+  // delete song from Cloudinary
+  await cloudinary.uploader.destroy(song.cloudinaryId);
 
   // delete song itself
   Song.findByIdAndDelete({ _id: id }, (err, result) => {

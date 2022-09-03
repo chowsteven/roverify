@@ -6,6 +6,7 @@ const songSchema = new Schema(
     artist: { type: String, default: '' },
     title: { type: String, default: '' },
     songURL: { type: String, default: '' },
+    cloudinaryId: { type: String },
     inPlaylist: { type: Schema.Types.ObjectId, ref: 'Playlist' },
     uploadedBy: { type: Schema.Types.ObjectId, ref: 'User' },
   },
