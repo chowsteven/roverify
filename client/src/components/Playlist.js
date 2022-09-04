@@ -4,7 +4,7 @@ import { UserContext } from '../context/UserContext';
 
 export const Playlist = ({ playlist, isChanging, setIsChanging }) => {
   const [isEdit, setIsEdit] = useState(false);
-  const [editName, setEditName] = useState('');
+  const [editName, setEditName] = useState(playlist.name);
   const { user } = useContext(UserContext);
 
   // patch request to edit playlist name
@@ -59,9 +59,10 @@ export const Playlist = ({ playlist, isChanging, setIsChanging }) => {
             onChange={handleEditChange}
             value={editName}
           />{' '}
-          <button>Edit</button>
+          <button>Save</button>
         </form>
       ) : (
+        // TODO: add cancel button
         <div>
           <Link to={`/playlists/${playlist._id}`}>{playlist.name}</Link>
           <button type='button' onClick={handleEdit}>
