@@ -113,7 +113,7 @@ exports.updateSong = [
   body('playlistName').escape(),
   async (req, res, next) => {
     // get id from URL
-    const { id } = req.params;
+    const { id } = req.body;
 
     // if invalid ObjectId, return error
     if (!mongoose.Types.ObjectId.isValid(id)) {
@@ -203,7 +203,9 @@ exports.deleteSong = async (req, res, next) => {
   );
 
   // delete song from Cloudinary
-  await cloudinary.uploader.destroy(song.cloudinaryId);
+  await cloudinary.uploader.destroy(song.cloudinaryId, {
+    resource_type: 'video',
+  });
 
   // delete song itself
   Song.findByIdAndDelete({ _id: id }, (err, result) => {
