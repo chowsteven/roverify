@@ -7,6 +7,7 @@ import { Sidebar } from '../components/Sidebar';
 export const Playlist = () => {
   const [playlist, setPlaylist] = useState({});
   const [isPlaying, setIsPlaying] = useState(false);
+  const [isChanging, setIsChanging] = useState(false);
   const [currentSong, setCurrentSong] = useState('');
   const { id } = useParams();
   const { user } = useContext(UserContext);
@@ -26,7 +27,7 @@ export const Playlist = () => {
     if (user) {
       getPlaylist();
     }
-  }, [user, id]);
+  }, [user, id, isChanging]);
 
   return (
     <div>
@@ -54,6 +55,9 @@ export const Playlist = () => {
                 isPlaying={isPlaying}
                 setIsPlaying={setIsPlaying}
                 setCurrentSong={setCurrentSong}
+                isChanging={isChanging}
+                setIsChanging={setIsChanging}
+                playlistName={playlist.name}
               />
             ))}
           </tbody>
