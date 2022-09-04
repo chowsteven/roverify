@@ -64,6 +64,7 @@ exports.addSong = [
     const uploadedSong = await cloudinary.uploader
       .upload(req.file.path, {
         resource_type: 'video',
+        image_metadata: true,
         folder: userId,
       })
       .catch((err) => res.json({ error: err.message }));
@@ -74,6 +75,7 @@ exports.addSong = [
         artist,
         title,
         songURL: uploadedSong.secure_url,
+        duration: uploadedSong.duration,
         cloudinaryId: uploadedSong.public_id,
         inPlaylist: targetPlaylist._id,
         uploadedBy: userId,
