@@ -13,9 +13,10 @@ export const Navbar = () => {
         <Link to='/'>Roverify</Link>
       </div>
 
-      {/* if user is logged in, show log out button in navbar. otherwise, show log in and sign up */}
+      {/* if user is logged in, show upload and log out button in navbar. otherwise, show log in and sign up */}
       {user ? (
-        <div>
+        <div className='flex gap-12'>
+          <Link to='/upload'>Upload</Link>
           <button onClick={() => logout()}>Log Out</button>
         </div>
       ) : (
