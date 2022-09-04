@@ -24,13 +24,15 @@ exports.getPlaylist = (req, res, next) => {
   }
 
   // find playlist by id
-  Playlist.findOne({ _id: id }, (err, playlist) => {
-    if (err) {
-      return res.json({ error: err.message });
-    }
+  Playlist.findOne({ _id: id })
+    .populate('songs')
+    .exec((err, playlist) => {
+      if (err) {
+        return res.json({ error: err.message });
+      }
 
-    res.json({ playlist });
-  });
+      res.json({ playlist });
+    });
 };
 
 // Add playlist
