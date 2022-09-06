@@ -8,7 +8,7 @@ export const Navbar = () => {
   const { logout } = useLogout();
 
   return (
-    <div className='flex justify-between h-16 items-center px-16 bg-slate-400'>
+    <header className='flex justify-between h-32 items-center px-16 text-lg font-semibold tracking-wider'>
       <div>
         <Link to='/'>Roverify</Link>
       </div>
@@ -20,11 +20,16 @@ export const Navbar = () => {
           <button onClick={() => logout()}>Log Out</button>
         </div>
       ) : (
-        <div className='flex gap-8'>
+        <div className='flex gap-8 items-center'>
           <Link to='/login'>Login</Link>
-          <Link to='/signup'>Sign Up</Link>
+          <Link
+            to='/signup'
+            className='border border-black bg-slate-200 px-4 py-2 rounded-md text-black hover:bg-black hover:text-slate-200 focus:bg-black focus:text-slate-200'
+          >
+            Sign Up
+          </Link>
         </div>
       )}
-    </div>
+    </header>
   );
 };
