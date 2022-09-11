@@ -34,7 +34,7 @@ export const useUpload = () => {
     } else {
       // clear loading state
       setIsLoading(false);
-      // navigate(-1);
+      navigate(`/playlists/${responseJSON.newSong.inPlaylist}`);
     }
   };
 
