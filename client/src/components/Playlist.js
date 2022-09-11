@@ -1,6 +1,8 @@
 import { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { UserContext } from '../context/UserContext';
+import { FaEdit, FaRegSave } from 'react-icons/fa';
+import { MdDelete } from 'react-icons/md';
 
 export const Playlist = ({ playlist, isChanging, setIsChanging }) => {
   const [isEdit, setIsEdit] = useState(false);
@@ -52,25 +54,33 @@ export const Playlist = ({ playlist, isChanging, setIsChanging }) => {
     <>
       {/* show text field to edit playlist name or show playlist name and actions */}
       {isEdit ? (
-        <form onSubmit={handleEditSubmit}>
+        <form onSubmit={handleEditSubmit} className='flex justify-between'>
           <input
             type='text'
             name='name'
             onChange={handleEditChange}
             value={editName}
+            className='w-40 p-2 rounded-md'
+            autoFocus
           />{' '}
-          <button>Save</button>
+          <button>
+            <FaRegSave />
+          </button>
         </form>
       ) : (
         // TODO: add cancel button
-        <div>
-          <Link to={`/playlists/${playlist._id}`}>{playlist.name}</Link>
-          <button type='button' onClick={handleEdit}>
-            Edit
-          </button>
-          <button type='button' onClick={handleDelete}>
-            Delete
-          </button>
+        <div className='flex justify-between pb-1'>
+          <div className='text-lg truncate w-40'>
+            <Link to={`/playlists/${playlist._id}`}>{playlist.name}</Link>
+          </div>
+          <div>
+            <button type='button' onClick={handleEdit} className='pr-1'>
+              <FaEdit />
+            </button>
+            <button type='button' onClick={handleDelete}>
+              <MdDelete />
+            </button>
+          </div>
         </div>
       )}
     </>

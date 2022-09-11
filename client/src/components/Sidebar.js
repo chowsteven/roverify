@@ -1,6 +1,8 @@
 import { useState, useContext, useEffect } from 'react';
 import { Playlist } from './Playlist';
 import { UserContext } from '../context/UserContext';
+import { MdPlaylistAdd } from 'react-icons/md';
+import { FaRegSave } from 'react-icons/fa';
 
 export const Sidebar = () => {
   const [isAdd, setIsAdd] = useState(false);
@@ -56,6 +58,7 @@ export const Sidebar = () => {
 
   return (
     <div>
+      <div className='text-2xl'>Your Playlists</div>
       {/* show playlists in sidebar */}
       {playlists.map((playlist) => (
         <Playlist
@@ -68,18 +71,26 @@ export const Sidebar = () => {
 
       {/* show text field to add playlist, or show add playlist button */}
       {isAdd ? (
-        <form onSubmit={handleAddSubmit}>
+        <form onSubmit={handleAddSubmit} className='flex justify-between'>
           <input
             type='text'
             name='name'
             onChange={handleAddChange}
             value={addName}
+            className='w-40 p-2 rounded-md'
+            autoFocus
           />
-          <button>Add</button>
+          <button>
+            <FaRegSave />
+          </button>
         </form>
       ) : (
-        <button type='button' onClick={handleAdd}>
-          Add new playlist
+        <button
+          type='button'
+          onClick={handleAdd}
+          className='flex items-center gap-2 text-gray-600'
+        >
+          <MdPlaylistAdd size={22} /> Add new playlist
         </button>
       )}
     </div>
