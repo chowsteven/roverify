@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useUpload } from '../hooks/useUpload';
 import { usePlaylists } from '../hooks/usePlaylists';
+import { MdOutlineError } from 'react-icons/md';
 
 export const Upload = () => {
   const [artist, setArtist] = useState('');
@@ -17,11 +18,12 @@ export const Upload = () => {
   };
 
   return (
-    <div className='w-max mx-auto mt-20'>
+    <div className='flex flex-col items-center mt-20'>
+      <div className='text-3xl font-semibold mb-8'>Upload a song</div>
       <form
         onSubmit={handleSubmit}
         encType='multipart/form-data'
-        className='flex flex-col'
+        className='flex flex-col w-64'
       >
         <div className='flex flex-col gap-1 mb-4'>
           <label htmlFor='artist'>Artist</label>
@@ -31,7 +33,7 @@ export const Upload = () => {
             id='artist'
             value={artist}
             onChange={(e) => setArtist(e.target.value)}
-            className='border-2 rounded-md w-64 p-2 hover:border-zinc-500'
+            className='border-2 rounded-md w-64 p-2 bg-gray-100 hover:border-gray-500'
             required={true}
           />
         </div>
@@ -44,7 +46,7 @@ export const Upload = () => {
             id='title'
             value={title}
             onChange={(e) => setTitle(e.target.value)}
-            className='border-2 rounded-md w-64 p-2 hover:border-zinc-500'
+            className='border-2 rounded-md w-64 p-2 bg-gray-100 hover:border-gray-500'
             required={true}
           />
         </div>
@@ -77,14 +79,18 @@ export const Upload = () => {
         </div>
 
         <button
-          className='w-max border-2 px-4 py-2 rounded-lg hover:scale-105'
+          className='w-max border-2 px-4 py-2 mb-8 rounded-lg hover:scale-105'
           disabled={isLoading}
         >
           Upload
         </button>
 
         {/* if there are errors, display them */}
-        {error ? <div>{error}</div> : null}
+        {error ? (
+          <div className='flex items-center gap-2 text-red-700'>
+            <MdOutlineError /> {error}
+          </div>
+        ) : null}
       </form>
     </div>
   );
