@@ -25,7 +25,7 @@ exports.getPlaylist = (req, res, next) => {
 
   // find playlist by id
   Playlist.findOne({ _id: id })
-    .populate('songs')
+    .populate({ path: 'songs', options: { sort: { createdAt: -1 } } })
     .exec((err, playlist) => {
       if (err) {
         return res.json({ error: err.message });
