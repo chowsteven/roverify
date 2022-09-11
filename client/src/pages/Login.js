@@ -23,7 +23,7 @@ export const Login = () => {
       <div className='text-3xl font-semibold mb-2'>Welcome Back!</div>
       <div className='mb-8'>
         Don't have an account?{' '}
-        <Link to='/login' className='text-blue-600 hover:underline'>
+        <Link to='/signup' className='text-blue-600 hover:underline'>
           Sign up now
         </Link>
       </div>
