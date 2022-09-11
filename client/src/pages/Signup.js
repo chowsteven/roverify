@@ -1,5 +1,7 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { useSignup } from '../hooks/useSignup';
+import { MdErrorOutline } from 'react-icons/md';
 
 export const Signup = () => {
   // set up state
@@ -17,8 +19,15 @@ export const Signup = () => {
   };
 
   return (
-    <div className='w-max mx-auto mt-20'>
-      <form onSubmit={(e) => handleSubmit(e)} className='flex flex-col'>
+    <div className='flex flex-col items-center mt-20'>
+      <div className='text-3xl font-semibold mb-2'>Join Roverify</div>
+      <div className='mb-8'>
+        Already have an account?{' '}
+        <Link to='/login' className='text-blue-600 hover:underline'>
+          Sign in now
+        </Link>
+      </div>
+      <form onSubmit={(e) => handleSubmit(e)} className='flex flex-col w-64'>
         <div className='flex flex-col gap-1 mb-4'>
           <label htmlFor='username'>Username</label>
           <input
@@ -27,7 +36,7 @@ export const Signup = () => {
             id='username'
             value={username}
             onChange={(e) => setUsername(e.target.value)}
-            className='border-2 rounded-md w-64 p-2 hover:border-zinc-500'
+            className='border-2 rounded-md w-64 p-2 bg-gray-100 hover:border-gray-500'
             required={true}
           />
         </div>
@@ -39,12 +48,12 @@ export const Signup = () => {
             id='password'
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className='border-2 rounded-md w-64 p-2 hover:border-zinc-500'
+            className='border-2 rounded-md w-64 p-2 bg-gray-100 hover:border-gray-500'
             required={true}
           />
         </div>
         <button
-          className='w-max border-2 px-4 py-2 rounded-lg hover:scale-105'
+          className='w-max border-2 px-4 py-2 mb-8 rounded-lg hover:scale-105'
           disabled={isLoading}
         >
           Sign In
@@ -57,15 +66,19 @@ export const Signup = () => {
           // otherwise, there is only one error message, so just display it
           error.length === 2 ? (
             <ul>
-              <li>{error[0]}</li>
-              <li>{error[1]}</li>
+              <li className='flex items-center gap-3 text-red-700 mb-2'>
+                <MdErrorOutline size={36} /> {error[0]}
+              </li>
+              <li className='flex items-center gap-3 text-red-700'>
+                <MdErrorOutline size={36} /> {error[1]}
+              </li>
             </ul>
           ) : (
-            <div>{error}</div>
+            <div className='flex items-center gap-2 text-red-700'>
+              <MdErrorOutline size={24} /> {error}
+            </div>
           )
-        ) : (
-          <div>{error}</div>
-        )}
+        ) : null}
       </form>
     </div>
   );

@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import { useLogin } from '../hooks/useLogin';
+import { Link } from 'react-router-dom';
+import { MdOutlineError } from 'react-icons/md';
 
 export const Login = () => {
   // set up state
@@ -16,8 +18,15 @@ export const Login = () => {
   };
 
   return (
-    <div className='w-max mx-auto mt-20'>
-      <form onSubmit={handleSubmit} className='flex flex-col'>
+    <div className='flex flex-col items-center mt-20'>
+      <div className='text-3xl font-semibold mb-2'>Welcome Back!</div>
+      <div className='mb-8'>
+        Don't have an account?{' '}
+        <Link to='/login' className='text-blue-600 hover:underline'>
+          Sign up now
+        </Link>
+      </div>
+      <form onSubmit={handleSubmit} className='flex flex-col w-64'>
         <div className='flex flex-col gap-1 mb-4'>
           <label htmlFor='username'>Username</label>
           <input
@@ -26,7 +35,7 @@ export const Login = () => {
             id='username'
             value={username}
             onChange={(e) => setUsername(e.target.value)}
-            className='border-2 rounded-md w-64 p-2 hover:border-zinc-500'
+            className='border-2 rounded-md w-64 p-2 bg-gray-100 hover:border-gray-500'
             required={true}
           />
         </div>
@@ -38,19 +47,23 @@ export const Login = () => {
             id='password'
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className='border-2 rounded-md w-64 p-2 hover:border-zinc-500'
+            className='border-2 rounded-md w-64 p-2 bg-gray-100 hover:border-gray-500'
             required={true}
           />
         </div>
         <button
-          className='w-max border-2 px-4 py-2 rounded-lg hover:scale-105'
+          className='w-max border-2 px-4 py-2 mb-8 rounded-lg hover:scale-105'
           disabled={isLoading}
         >
           Log In
         </button>
 
         {/* if there are errors, display them */}
-        {error ? <div>{error}</div> : null}
+        {error ? (
+          <div className='flex items-center gap-2 text-red-700'>
+            <MdOutlineError /> {error}
+          </div>
+        ) : null}
       </form>
     </div>
   );
