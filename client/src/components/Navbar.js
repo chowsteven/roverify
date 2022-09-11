@@ -24,7 +24,7 @@ export const Navbar = () => {
           <Link to='/login'>Login</Link>
           <Link
             to='/signup'
-            className='border border-black bg-slate-200 px-4 py-2 rounded-md text-black hover:bg-black hover:text-slate-200 focus:bg-black focus:text-slate-200'
+            className='border border-black bg-slate-200 px-4 py-2 rounded-md text-black hover:bg-black hover:text-gray-200'
           >
             Sign Up
           </Link>
