@@ -3,6 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 import { UserContext } from '../context/UserContext';
 import { Song } from '../components/Song';
 import { Sidebar } from '../components/Sidebar';
+import { MdOutlineAdd } from 'react-icons/md';
 
 export const Playlist = () => {
   const [playlist, setPlaylist] = useState({});
@@ -30,21 +31,25 @@ export const Playlist = () => {
   }, [user, id, isChanging]);
 
   return (
-    <div>
-      <Sidebar />
-      <div>
-        <div>{playlist.name}</div>
-        <Link to='/upload'>Add a song</Link>
+    <div className='px-16'>
+      <div className='hidden md:block'>
+        <Sidebar />
+      </div>
+      <div className='flex justify-between items-center mb-6'>
+        <div className='text-4xl'>{playlist.name}</div>
+        <Link to='/upload' className='flex items-center gap-1'>
+          <MdOutlineAdd />
+          Add a song
+        </Link>
       </div>
       {playlist.songs && (
-        <table>
+        <table className='w-full'>
           <thead>
             <tr>
-              <th>Play</th>
-              <th>Song Name</th>
-              <th>Artist</th>
-              <th>Duration</th>
-              <th>Actions</th>
+              <th className='text-start w-48 text-lg'>Song Name</th>
+              <th className='text-start w-48 text-lg'>Artist</th>
+              <th className='text-start w-24 text-lg'>Duration</th>
+              <th className='text-end text-lg'>Actions</th>
             </tr>
           </thead>
           <tbody>

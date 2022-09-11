@@ -1,5 +1,7 @@
 import { useContext, useState } from 'react';
 import { UserContext } from '../context/UserContext';
+import { FaPlay, FaEdit, FaRegSave } from 'react-icons/fa';
+import { MdDelete } from 'react-icons/md';
 
 export const Song = ({
   song,
@@ -72,11 +74,6 @@ export const Song = ({
 
   return (
     <tr>
-      <td>
-        <button type='button' onClick={handlePlay}>
-          Play
-        </button>
-      </td>
       {isEdit ? (
         <>
           <td>
@@ -86,32 +83,43 @@ export const Song = ({
                 name='title'
                 value={editTitle}
                 onChange={handleEditTitleChange}
+                className='w-28 rounded-md p-2 mr-4'
               />
+            </form>
+          </td>
+          <td>
+            <form>
               <input
                 type='text'
                 name='artist'
                 value={editArtist}
                 onChange={handleEditArtistChange}
+                className='w-28 rounded-md p-2 mr-4'
               />
             </form>
           </td>
           <td>{song.duration}</td>
           <td>
-            <button form='edit'>Save</button>
+            <button form='edit'>
+              <FaRegSave size={24} />
+            </button>
           </td>
           {/* TODO: add cancel button */}
         </>
       ) : (
         <>
-          <td>{song.title}</td>
-          <td>{song.artist}</td>
-          <td>{song.duration}</td>
-          <td>
+          <td className='py-2'>{song.title}</td>
+          <td className='py-2'>{song.artist}</td>
+          <td className='py-2'>{song.duration}</td>
+          <td className='flex justify-end gap-2 pt-2.5'>
+            <button type='button' onClick={handlePlay}>
+              <FaPlay size={14} />
+            </button>
             <button type='button' onClick={handleEdit}>
-              Edit
+              <FaEdit size={14} />
             </button>
             <button type='button' onClick={handleDelete}>
-              Delete
+              <MdDelete size={18} />
             </button>
           </td>
         </>
