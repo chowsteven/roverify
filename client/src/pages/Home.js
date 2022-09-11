@@ -12,9 +12,9 @@ export const Home = () => {
         //   style={{ backgroundImage: 'url(/hero.jpg' }}
         //   className='w-full h-screen -mt-32 bg-center bg-no-repeat bg-cover'
         // >
-        <div className='flex flex-col gap-24 h-screen pt-24 px-16'>
+        <div className='flex flex-col gap-24 h-screen pt-24 px-16 lg:flex-row'>
           <Sidebar />
-          <main className='order-first'>
+          <main className='order-first lg:order-last'>
             <div className='text-4xl font-semibold pb-4'>
               Welcome to Roverify!
             </div>

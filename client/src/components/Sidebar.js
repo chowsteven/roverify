@@ -58,7 +58,7 @@ export const Sidebar = () => {
 
   return (
     <div>
-      <div className='text-2xl'>Your Playlists</div>
+      <div className='text-2xl mb-4'>Your Playlists</div>
       {/* show playlists in sidebar */}
       {playlists.map((playlist) => (
         <Playlist
@@ -88,7 +88,7 @@ export const Sidebar = () => {
         <button
           type='button'
           onClick={handleAdd}
-          className='flex items-center gap-2 text-gray-600'
+          className='flex items-center gap-2 text-gray-600 mt-2'
         >
           <MdPlaylistAdd size={22} /> Add new playlist
         </button>

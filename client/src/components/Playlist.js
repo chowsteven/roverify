@@ -70,7 +70,7 @@ export const Playlist = ({ playlist, isChanging, setIsChanging }) => {
       ) : (
         // TODO: add cancel button
         <div className='flex justify-between pb-1'>
-          <div className='text-lg truncate w-40'>
+          <div className='text-lg truncate w-28'>
             <Link to={`/playlists/${playlist._id}`}>{playlist.name}</Link>
           </div>
           <div>
