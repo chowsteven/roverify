@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useLogin } from '../hooks/useLogin';
 import { Link } from 'react-router-dom';
 import { MdOutlineError } from 'react-icons/md';
+import { ClipLoader } from 'react-spinners';
 
 export const Login = () => {
   // set up state
@@ -51,12 +52,13 @@ export const Login = () => {
             required={true}
           />
         </div>
-        <button
-          className='w-max border-2 px-4 py-2 mb-8 rounded-lg hover:scale-105'
-          disabled={isLoading}
-        >
-          Log In
-        </button>
+        {isLoading ? (
+          <ClipLoader size={24} />
+        ) : (
+          <button className='w-max border-2 px-4 py-2 mb-8 rounded-lg hover:scale-105'>
+            Log In
+          </button>
+        )}
 
         {/* if there are errors, display them */}
         {error ? (
