@@ -83,7 +83,7 @@ export const Song = ({
                 name='title'
                 value={editTitle}
                 onChange={handleEditTitleChange}
-                className='w-28 rounded-md p-2 mr-4'
+                className='w-28 rounded-md p-2 mr-4 md:w-64 xl:w-96 2xl:w-[512px]'
               />
             </form>
           </td>
@@ -94,7 +94,7 @@ export const Song = ({
                 name='artist'
                 value={editArtist}
                 onChange={handleEditArtistChange}
-                className='w-28 rounded-md p-2 mr-4'
+                className='w-28 rounded-md p-2 mr-4 md:w-64 xl:w-96 2xl:w-[512px]'
               />
             </form>
           </td>

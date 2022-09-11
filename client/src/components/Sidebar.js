@@ -77,7 +77,7 @@ export const Sidebar = () => {
             name='name'
             onChange={handleAddChange}
             value={addName}
-            className='w-40 p-2 rounded-md'
+            className='w-40 p-2 rounded-md mr-2'
             autoFocus
           />
           <button>
