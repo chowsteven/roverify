@@ -121,49 +121,49 @@ exports.updateSong = [
     }
 
     // get playlistName from req.body
-    const { playlistName } = req.body;
+    // const { playlistName } = req.body;
 
     // get userId
-    const userId = req.userId;
+    // const userId = req.userId;
 
-    // find song and store playlist ID
-    const oldSong = await Song.findOne({ _id: id, uploadedBy: userId });
-    const oldSongPlaylistId = oldSong.inPlaylist;
+    // // find song and store playlist ID
+    // const oldSong = await Song.findOne({ _id: id, uploadedBy: userId });
+    // const oldSongPlaylistId = oldSong.inPlaylist;
 
-    // find new playlist id using playlistName input and store playlist ID
-    const newPlaylist = await Playlist.findOne({
-      name: playlistName,
-      createdBy: userId,
-    });
-    const newPlaylistId = newPlaylist._id;
+    // // find new playlist id using playlistName input and store playlist ID
+    // const newPlaylist = await Playlist.findOne({
+    //   name: playlistName,
+    //   createdBy: userId,
+    // });
+    // const newPlaylistId = newPlaylist._id;
 
-    // if user updated the playlist, remove song from old playlist and add it to the new one
-    if (oldSongPlaylistId !== newPlaylistId) {
-      Playlist.findOneAndUpdate(
-        { _id: oldSongPlaylistId },
-        { $pull: { songs: id } },
-        (err, playlist) => {
-          if (err) {
-            return res.json({ error: err.message });
-          }
-        }
-      );
-      Playlist.findOneAndUpdate(
-        { _id: newPlaylistId },
-        { $push: { songs: id } },
-        (err, playlist) => {
-          if (err) {
-            return res.json({ error: err.message });
-          }
-        }
-      );
-    }
+    // // if user updated the playlist, remove song from old playlist and add it to the new one
+    // if (oldSongPlaylistId !== newPlaylistId) {
+    //   Playlist.findOneAndUpdate(
+    //     { _id: oldSongPlaylistId },
+    //     { $pull: { songs: id } },
+    //     (err, playlist) => {
+    //       if (err) {
+    //         return res.json({ error: err.message });
+    //       }
+    //     }
+    //   );
+    //   Playlist.findOneAndUpdate(
+    //     { _id: newPlaylistId },
+    //     { $push: { songs: id } },
+    //     (err, playlist) => {
+    //       if (err) {
+    //         return res.json({ error: err.message });
+    //       }
+    //     }
+    //   );
+    // }
 
     // update song itself
     // ensure that inPlaylist takes an ObjectId and uploadedBy stays the same
     Song.findOneAndUpdate(
       { _id: id },
-      { ...req.body, inPlaylist: newPlaylistId, uploadedBy: userId },
+      { title: req.body.title, artist: req.body.artist },
       { new: true },
       (err, song) => {
         if (err) {

@@ -36,7 +36,7 @@ export const Song = ({
         id: song._id,
         title: editTitle,
         artist: editArtist,
-        playlistName,
+        // playlistName,
       }),
     });
 
