@@ -1,16 +1,18 @@
 import { useContext, useState } from 'react';
 import { UserContext } from '../context/UserContext';
+import { secondsToTimer } from '../utils/secondsToTimer';
 import { FaPlay, FaEdit, FaRegSave } from 'react-icons/fa';
 import { MdDelete } from 'react-icons/md';
 
 export const Song = ({
   song,
-  isPlaying,
+  idx,
   setIsPlaying,
-  setCurrentSong,
+  setCurrentSongIdx,
   isChanging,
   setIsChanging,
-  playlistName,
+  setSongDuration,
+  // playlistName,
 }) => {
   const [isEdit, setIsEdit] = useState(false);
   const [editTitle, setEditTitle] = useState(song.title);
@@ -18,8 +20,8 @@ export const Song = ({
   const { user } = useContext(UserContext);
 
   const handlePlay = () => {
-    setIsPlaying(!isPlaying);
-    setCurrentSong(song.songURL);
+    setIsPlaying(true);
+    setCurrentSongIdx(idx);
   };
 
   // patch request to edit song title/artist
@@ -98,7 +100,7 @@ export const Song = ({
               />
             </form>
           </td>
-          <td>{song.duration}</td>
+          <td>{secondsToTimer(song.duration)}</td>
           <td>
             <button form='edit'>
               <FaRegSave size={24} />
@@ -110,7 +112,7 @@ export const Song = ({
         <>
           <td className='py-2'>{song.title}</td>
           <td className='py-2'>{song.artist}</td>
-          <td className='py-2'>{song.duration}</td>
+          <td className='py-2'>{secondsToTimer(song.duration)}</td>
           <td className='flex justify-end gap-2 pt-2.5'>
             <button type='button' onClick={handlePlay}>
               <FaPlay size={14} />
