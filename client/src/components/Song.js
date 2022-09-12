@@ -11,7 +11,6 @@ export const Song = ({
   setCurrentSongIdx,
   isChanging,
   setIsChanging,
-  setSongDuration,
   // playlistName,
 }) => {
   const [isEdit, setIsEdit] = useState(false);

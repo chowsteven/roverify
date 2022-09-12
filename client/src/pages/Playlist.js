@@ -11,7 +11,6 @@ export const Playlist = () => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [isChanging, setIsChanging] = useState(false);
   const [currentSongIdx, setCurrentSongIdx] = useState(null);
-  const [songDuration, setSongDuration] = useState('00:00');
   const { id } = useParams();
   const { user } = useContext(UserContext);
 
@@ -71,7 +70,6 @@ export const Playlist = () => {
                   setCurrentSongIdx={setCurrentSongIdx}
                   isChanging={isChanging}
                   setIsChanging={setIsChanging}
-                  setSongDuration={setSongDuration}
                   // playlistName={playlist.name}
                 />
               ))}
