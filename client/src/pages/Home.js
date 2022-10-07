@@ -5,13 +5,18 @@ import { UserContext } from '../context/UserContext';
 
 export const Home = () => {
   const { user } = useContext(UserContext);
+
+  const handleScroll = () => {
+    window.scroll({
+      top: document.body.offsetHeight,
+      left: 0,
+      behavior: 'smooth',
+    });
+  };
+
   return (
     <>
       {user ? (
-        // <div
-        //   style={{ backgroundImage: 'url(/hero.jpg' }}
-        //   className='w-full h-screen -mt-32 bg-center bg-no-repeat bg-cover'
-        // >
         <div className='flex flex-col gap-24 h-screen pt-24 px-16 lg:flex-row'>
           <Sidebar />
           <main className='order-first lg:order-last'>
@@ -30,7 +35,14 @@ export const Home = () => {
         <div className='w-full h-screen -mt-32 bg-center bg-no-repeat bg-cover'>
           <main className='h-screen flex flex-col gap-12 justify-center items-center pb-36'>
             <div className='text-6xl font-semibold'>Welcome to Roverify</div>
-            <div className='text-xl font-medium'>Upload and listen.</div>
+            <div className='mb-24 text-xl font-medium'>Upload and listen.</div>
+            <button onClick={handleScroll}>
+              <img
+                src='../down-arrow.png'
+                alt='Down arrow'
+                className='hover:scale-105'
+              ></img>
+            </button>
           </main>
           {/* credit to landingfolio.com for the code below */}
           <section className='py-10 bg-white sm:py-16 lg:py-24'>
@@ -66,9 +78,9 @@ export const Home = () => {
                       Create an account
                     </h3>
                     <p className='mt-4 text-base text-gray-600'>
-                      Amet minim mollit non deserunt ullamco est sit aliqua
-                      dolor do amet sint. Velit officia consequat duis enim
-                      velit mollit.
+                      Get started instantly by making a free account. Account
+                      details are encrypted and will never be shared with third
+                      parties.
                     </p>
                   </div>
 
@@ -83,9 +95,8 @@ export const Home = () => {
                       Upload your songs
                     </h3>
                     <p className='mt-4 text-base text-gray-600'>
-                      Amet minim mollit non deserunt ullamco est sit aliqua
-                      dolor do amet sint. Velit officia consequat duis enim
-                      velit mollit.
+                      Choose file from your computer to securely upload to our
+                      hosting server. Create playlists to organize your library!
                     </p>
                   </div>
 
@@ -100,9 +111,8 @@ export const Home = () => {
                       Stream for free
                     </h3>
                     <p className='mt-4 text-base text-gray-600'>
-                      Amet minim mollit non deserunt ullamco est sit aliqua
-                      dolor do amet sint. Velit officia consequat duis enim
-                      velit mollit.
+                      Play your uploaded songs at streaming quality for no cost.
+                      No ads, no premium, just stream.
                     </p>
                   </div>
                 </div>
@@ -112,7 +122,7 @@ export const Home = () => {
           <div className='flex justify-center py-10'>
             <Link
               to='/signup'
-              className='px-8 py-4 font-semibold border border-black rounded-md hover:bg-black hover:text-white focus:bg-black focus:text-white'
+              className='px-8 py-4 font-semibold border border-black bg-black  text-white rounded-md hover:bg-white hover:text-black focus:bg-white focus:text-black'
             >
               Try for free
             </Link>
