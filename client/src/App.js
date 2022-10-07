@@ -23,13 +23,11 @@ function App() {
         />
         <Route
           path='playlists/:id'
-          // element={user ? <Playlist /> : <Navigate to='/login' />}
-          element={<Playlist />}
+          element={user ? <Playlist /> : <Navigate to='/login' />}
         />
         <Route
           path='upload'
-          // element={user ? <Upload /> : <Navigate to='/login' />}
-          element={<Upload />}
+          element={user ? <Upload /> : <Navigate to='/login' />}
         />
       </Routes>
     </BrowserRouter>
