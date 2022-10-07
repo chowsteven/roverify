@@ -27,13 +27,10 @@ export const Home = () => {
           </main>
         </div>
       ) : (
-        <div
-          style={{ backgroundImage: 'url(/hero.jpg' }}
-          className='w-full h-screen -mt-32 bg-center bg-no-repeat bg-cover'
-        >
-          <main className='h-screen flex flex-col gap-2 justify-center items-center pb-36 text-4xl font-bold'>
-            <div>Welcome to Roverify</div>
-            <div>Upload and listen.</div>
+        <div className='w-full h-screen -mt-32 bg-center bg-no-repeat bg-cover'>
+          <main className='h-screen flex flex-col gap-12 justify-center items-center pb-36'>
+            <div className='text-6xl font-semibold'>Welcome to Roverify</div>
+            <div className='text-xl font-medium'>Upload and listen.</div>
           </main>
           {/* credit to landingfolio.com for the code below */}
           <section className='py-10 bg-white sm:py-16 lg:py-24'>
